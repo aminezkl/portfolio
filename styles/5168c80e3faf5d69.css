@@ -1,4 +1,4 @@
-.AdsHeader_adsHeader__GVNWf {
+.Titre_h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,9 +12,9 @@
     height: 72px;
     width: auto
 }
-
+/*ajt*/
 @media (max-width:1023px) {
-    .AdsHeader_adsHeader__GVNWf {
+    .Titre_h1 {
         height: 80px
     }
 
@@ -323,8 +323,8 @@
         padding: 60px 0 12px
     }
 }
-
-.AdsPerfectAirportPickups_adsPerfectAirportPickups__t7zvF {
+/*ajt*/
+.main {
     align-items: center;
     display: flex;
     flex-direction: column;
