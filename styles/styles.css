@@ -3249,11 +3249,7 @@ body:not(.loaded) * {
     transition: none!important
 }
 
-main {
-    display: block;
-    background-color: #fff;
-    overflow-x: hidden
-}
+
 
 .visually-hidden {
     position: absolute!important;
