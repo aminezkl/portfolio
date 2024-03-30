@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Inter:wght@900&display=swap" rel="stylesheet">
+		<title>Chauffeur VTC - Service Taxi et Uber</title>
+
+		<meta name="description" content="Chauffeur VTC disponible 24/7, offrant des services de taxi - Uber. Confort, fiabilité et flexibilité pour tous vos déplacements. Réservez dès maintenant !">
+		<meta name="keywords" content="taxi Besançon,chauffeur vtc, chauffeur uber, chauffeur privé, services de taxi">
+		<link rel="icon" type="image/png" href="images/icon.png">
+
+
+		
+	</head>
+	<body>
+
+		
+
+
+		<div class="container">
+
+			<a class="bouton-fixe" href="https://wa.me/message/VZ6BZMNR2MQOO1">
+				<img src="images/w.png" alt="logo w">
+			</a>
+
+			<header>
+				<img src="images/ph.jpg" alt="skateboard sur un sol goudronné">
+				<div class="headerTextContent">
+					<h1>Chauffeur VTC <br> Service Taxi et Uber</h1>
+				</div>
+			</header>
+			<main>
+                <section>
+                    <h2>Formulaire de demande de devis</h2>
+                    <p>Pour demande de devis, remplissez le formulaire ci-dessous.</p>
+                    <form id="contact-form" class="reservationForm">
+
+                        <table>
+                            <tr>
+                                <td> <label for="departureAddress">Adresse de départ:</label><br></td>
+                                <td> <input type="text" id="departureAddress" name="departureAddress" autocomplete="off" required><br>
+                                    <ul id="departureSuggestions" class="suggestions-list"></ul></td>
+                                
+                            </tr>
+                            <tr>
+                                <td> <label for="arrivalAddress">Adresse d'arrivée:</label><br></td>
+                                <td> <input type="text" id="arrivalAddress" name="arrivalAddress" autocomplete="off" required><br>
+                                    <ul id="arrivalSuggestions" class="suggestions-list"></ul></td>
+                            </tr>
+                            <tr>
+                                <td><label for="date">Date de départ :</label></td>
+                                <td><input type="date" id="date" name="naissance" value="" required></td>
+                            </tr>
+                            <tr>
+                                <td><label for="heure">Heure de départ :</label></td>
+                                <td><input type="time" id="heure" name="heure" value=""></td>
+                            </tr>
+                            <tr>
+                                <td><label for="txtEmail">Votre email :</label></td>
+                                <td><input type="email" name="email" id="txtEmail" required></td>
+                            </tr>
+                            <tr>
+                                <td><label for="phoneNumber">Numéro de téléphone :</label></td>
+                                <td><input type="tel" name="phoneNumber" id="phoneNumber" required></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <!-- <label><input type="checkbox" name="cbCGU" value="1" required>
+                                        J'ai lu et j'accepte les conditions générales d'utilisation </label> -->
+                                    <label><input type="checkbox" name="cbSpam" value="1" checked>
+                                        J'accepte de recevoir un appel </label>
+                    
+                                    <label><input type="checkbox" name="cbSpam" value="1" checked>
+                                        J'accepte de recevoir un email </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" name="btnInscription" value="Envoyer">
+                                    <input type="reset" value="Réinitialiser">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </section>
+
+				<!-- la nouvelle section -->
+				<section class="sectionLinearGradientBackground whiteContentSection textCenter">
+				<h2>Notre équipe de chauffeurs</h2>
+				<div class="directionRow">
+					<article>
+						<!-- <img class="imagesEquipe" src="images/amine.jpg"> -->
+						<h3>Amine</h3>
+						<p>ZOUKEL</p>
+					</article>
+					<article>
+						<!-- <img class="imagesEquipe" src="images/younes.jpg"> -->
+						<h3>Younes</h3>
+						<p>MALAH</p>
+					</article>
+				</div>
+				</section>
+
+
+				<!-- la section avec deux bouton -->
+				<section class="sectionLightGreyBackground">
+					<h2>Découvrez !</h2>
+					<div class="directionColumn">
+						<a class="button buttonDrakGreyColor buttonRounded buttonHighlight" href="https://g.page/r/CTD7XYE38mxCEBM/review">Donner votre avis !</a>
+					</div>
+				</section>
+
+			</main>
+		</div>
+	</body>
+</html>
+
+
+
+<!-- adress auto -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const departureAddressInput = document.getElementById('departureAddress');
+        const departureSuggestionsList = document.getElementById('departureSuggestions');
+        const arrivalAddressInput = document.getElementById('arrivalAddress');
+        const arrivalSuggestionsList = document.getElementById('arrivalSuggestions');
+
+        function fetchAddressSuggestions(inputText, suggestionsList, inputElement) {
+            fetch(`https://api-adresse.data.gouv.fr/search/?q=${inputText}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsList.innerHTML = '';
+                    data.features.forEach(feature => {
+                        const address = feature.properties.label;
+                        const suggestionItem = document.createElement('li');
+                        suggestionItem.classList.add('suggestion-item');
+                        suggestionItem.textContent = address;
+                        suggestionItem.addEventListener('click', function () {
+                            inputElement.value = address;
+                            suggestionsList.style.display = 'none';
+                        });
+                        suggestionsList.appendChild(suggestionItem);
+                    });
+                    suggestionsList.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error fetching suggestions:', error);
+                });
+        }
+        departureAddressInput.addEventListener('input', function () {
+            const inputText = departureAddressInput.value.trim();
+            if (inputText.length >= 3) {
+                fetchAddressSuggestions(inputText, departureSuggestionsList, departureAddressInput);
+            } else {
+                departureSuggestionsList.style.display = 'none';
+            }
+        });
+        arrivalAddressInput.addEventListener('input', function () {
+            const inputText = arrivalAddressInput.value.trim();
+            if (inputText.length >= 3) {
+                fetchAddressSuggestions(inputText, arrivalSuggestionsList, arrivalAddressInput);
+            } else {
+                arrivalSuggestionsList.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+
+<!-- envoi formulaire sur email -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init("ECa2z8ldVb2FBaizk"); // Utilisation de la Public Key
+    })();
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var accepteAppel = document.querySelector('input[name="cbSpam"][value="1"]:checked');
+        var accepteEmail = document.querySelectorAll('input[name="cbSpam"][value="1"]:checked')[1];
+
+        var email = document.getElementById('txtEmail').value;
+        var message1 = 'Départ : ' + document.getElementById('departureAddress').value + '\n' +
+               'D\'rrivée : ' + document.getElementById('arrivalAddress').value + '\n' +
+               'Date : ' + document.getElementById('date').value + '\n' +
+               'Heure : ' + document.getElementById('heure').value + '\n' +
+               'email : ' + document.getElementById('txtEmail').value + '\n' +
+               'Numéro de téléphone : ' + document.getElementById('phoneNumber').value + '\n' +
+               'Accepte appel : ' + (accepteAppel ? 'Oui' : 'Non') + '\n' +
+               'Accepte email : ' + (accepteEmail ? 'Oui' : 'Non');
+
+        emailjs.send("service_lrdsf4b", "template_97kouvy", {
+            from_name: email,
+            to_name: "amine.zoukel.31@gmail.com",
+            message : message1
+        }).then(function(response) {
+            console.log('E-mail envoyé avec succès!', response.status, response.text);
+            alert('Votre message a été envoyé avec succès!');
+            document.getElementById('contact-form').reset(); // Réinitialiser le formulaire après l'envoi
+        }, function(error) {
+            console.log('Echec de l\'envoi de l\'e-mail :', error);
+            alert('Une erreur s\'est produite lors de l\'envoi du message. Veuillez réessayer plus tard.');
+        });
+    });
+</script>
+
+
+ <!-- date aujourdui et interdir les date du passé -->
+ <script>
+    // Obtenez la date actuelle
+    var today = new Date();
+
+    // Formattez la date en YYYY-MM-DD (format requis pour un champ de type "date")
+    var formattedDate = today.toISOString().split('T')[0];
+
+    // Mettez à jour la valeur de l'élément input avec la date actuelle
+    document.getElementById('date').value = formattedDate;
+
+    // Mettez à jour la valeur de l'attribut min pour empêcher les dates antérieures
+    document.getElementById('date').setAttribute('min', formattedDate);
+</script>
+
+
